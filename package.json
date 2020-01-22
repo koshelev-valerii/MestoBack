@@ -1,7 +1,6 @@
 {
   "name": "mesto-back",
-  "version": "0.1.0",
-  "description": "-------------------------------",
+  "version": "0.1.1",
   "main": "app.js",
   "dependencies": {
     "eslint": "^6.8.0",
@@ -24,5 +23,6 @@
   "bugs": {
     "url": "https://github.com/koshelev-valerii/MestoBack/issues"
   },
-  "homepage": "https://github.com/koshelev-valerii/MestoBack#readme"
+  "homepage": "https://github.com/koshelev-valerii/MestoBack#readme",
+  "description": ""
 }
