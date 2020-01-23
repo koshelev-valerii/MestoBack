@@ -1,15 +1,17 @@
 {
   "name": "mesto-back",
-  "version": "0.1.1",
+  "version": "0.1.2",
+  "description": "Backend part of the project Mesto",
   "main": "app.js",
   "dependencies": {
+    "express": "^4.17.1"
+  },
+  "devDependencies": {
     "eslint": "^6.8.0",
     "eslint-config-airbnb-base": "^14.0.0",
     "eslint-plugin-import": "^2.20.0",
-    "express": "^4.17.1",
     "nodemon": "^2.0.2"
   },
-  "devDependencies": {},
   "scripts": {
     "start": "node app.js",
     "dev": "nodemon app.js"
@@ -23,6 +25,5 @@
   "bugs": {
     "url": "https://github.com/koshelev-valerii/MestoBack/issues"
   },
-  "homepage": "https://github.com/koshelev-valerii/MestoBack#readme",
-  "description": ""
+  "homepage": "https://github.com/koshelev-valerii/MestoBack#readme"
 }

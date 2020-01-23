@@ -17,4 +17,4 @@
 * `localhost:3000/users/8340d0ec33270a25f2413b69`
 * `localhost:3000/users/f20c9c560aa652a72cba323f`
 
-## Version 0.1.1
+## Version 0.1.2

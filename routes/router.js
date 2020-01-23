@@ -6,7 +6,7 @@ const cards = require('./cards');
 router.use(users);
 router.use(cards);
 
-router.get('*', (req, res) => {
+router.all('*', (req, res) => {
   res.status(404).send({ message: 'Запрашиваемый ресурс не найден' });
 });
 
