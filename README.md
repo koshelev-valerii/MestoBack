@@ -1,6 +1,6 @@
 # MestoBack author Valerii Koshelev
 
-## Version 0.2.0
+## Version 0.2.1
 
 ## Getting Started 
 
@@ -17,10 +17,6 @@
 #### Get card list
 
 `GET /cards`
-
-#### Get card by id
-
-`GET /cards/:id`
 
 #### Create new card
 
