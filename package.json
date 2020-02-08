@@ -1,10 +1,12 @@
 {
   "name": "mesto-back",
-  "version": "0.1.2",
+  "version": "0.2.0",
   "description": "Backend part of the project Mesto",
   "main": "app.js",
   "dependencies": {
-    "express": "^4.17.1"
+    "body-parser": "^1.19.0",
+    "express": "^4.17.1",
+    "mongoose": "^5.8.11"
   },
   "devDependencies": {
     "eslint": "^6.8.0",

@@ -1,21 +1,25 @@
 const router = require('express').Router();
 
-const users = require('../data/users.json');
+const User = require('../models/user');
 
 router.get('/users', (req, res) => {
-  res.send(users);
+  User.find({})
+      .then(users => res.send({ data: users }))
+      .catch(err => res.status(500).send({ message: `Произошла ошибка : ${err}` }));
 });
 
 router.get('/users/:id', (req, res) => {
-  const { id } = req.params;
-  // eslint-disable-next-line no-underscore-dangle
-  const user = users.find((item) => item._id === id);
-  if (user) {
-    res.send(user);
-    return;
-  }
+  User.findById(req.params.id)
+      .then(users => res.send({ data: users }))
+      .catch(err => res.status(500).send({ message: `Произошла ошибка : ${err}` }));
+});
 
-  res.status(404).send({ message: 'Нет пользователя с таким id' });
+router.post('/users', (req, res) => {
+  const { name, about, avatar } = req.body;
+
+  User.create({ name, about, avatar })
+      .then(users => res.send({ data: users }))
+      .catch(err => res.status(500).send({ message: `Произошла ошибка : ${err}` }));
 });
 
 module.exports = router;
