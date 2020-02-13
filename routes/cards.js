@@ -19,7 +19,13 @@ router.post('/cards', (req, res) => {
 
 router.delete('/cards/:id', (req, res) => {
   Cards.findByIdAndRemove(req.params.id)
-      .then(cards => res.send({ data: cards }))
+      .then(cards => {
+        if (!cards) {
+          res.status(404).send({ message: `Пользователь не найден` });
+          return;
+        } 
+        res.send({ data: cards });
+        })
       .catch(err => res.status(500).send({ message: `Произошла ошибка : ${err}` }));
 });
 

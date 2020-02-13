@@ -10,7 +10,12 @@ router.get('/users', (req, res) => {
 
 router.get('/users/:id', (req, res) => {
   User.findById(req.params.id)
-      .then(users => res.send({ data: users }))
+      .then(users => {
+        if (!users) {
+          res.status(404).send({ message: `Пользователь не найден` })
+          return;
+        } 
+        res.send({ data: users })})
       .catch(err => res.status(500).send({ message: `Произошла ошибка : ${err}` }));
 });
 
