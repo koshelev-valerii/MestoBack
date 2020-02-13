@@ -20,6 +20,6 @@ const userSchema = new mongoose.Schema({
     }
 });
 
-userSchema.path('avatar').validate(validator.isURL, INVALID_LINK);
+userSchema.path('avatar').validate(validator.isURL, 'link invalid');
 
 module.exports = mongoose.model('user', userSchema);
