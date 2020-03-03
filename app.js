@@ -1,8 +1,12 @@
+require('dotenv').config();
+const helmet = require('helmet');
 const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
-
+const cookieParser = require('cookie-parser');
 const router = require('./routes/router');
+const auth = require('./middlewares/auth');
+const { login, createUser } = require('./controllers/users');
 
 const { PORT = 3000 } = process.env;
 const app = express();
@@ -13,17 +17,16 @@ mongoose.connect('mongodb://localhost:27017/mestodb', {
   useFindAndModify: false,
 });
 
-app.use((req, res, next) => {
-  req.user = {
-    _id: '5e3e857d4c56fa8d080ff590',
-  };
-
-  next();
-});
-
-app.use(express.static(`${__dirname}/public`));
+app.use(helmet());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
+app.post('/signin', login);
+app.post('/signup', createUser);
+app.use(express.static(`${__dirname}/public`));
+
+
+app.use(cookieParser());
+app.use(auth);
 app.use(router);
 
 app.listen(PORT, () => {
