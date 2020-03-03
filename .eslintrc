@@ -2,6 +2,9 @@
   "extends": "airbnb-base",
   "rules": {
     "no-console": "off",
+    "func-names": "off",
+    "object-curly-newline": "off",
+    "consistent-return": "off",
     "linebreak-style": 0,
     "no-underscore-dangle": [
       "error",
