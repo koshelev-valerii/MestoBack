@@ -1,5 +1,7 @@
 # MestoBack author Valerii Koshelev
 
+## Version 0.3.0
+
 ## Getting Started 
 
 ### Download and run:  
@@ -8,13 +10,34 @@
 * `npm run start` (for start)
 * `npm run dev` (for start with hot reload)
 
-### You can try:
+## API Resource "Cards"
 
-* `localhost:3000`
-* `localhost:3000/info`
-* `localhost:3000/users`
-* `localhost:3000/cards`
-* `localhost:3000/users/8340d0ec33270a25f2413b69`
-* `localhost:3000/users/f20c9c560aa652a72cba323f`
+### HTTP Methods
 
-## Version 0.1.2
+#### Get card list
+
+`GET /cards`
+
+#### Create new card
+
+`POST /cards`
+
+#### Delete card by id
+
+`DELETE /cards/:id`
+
+## API Resource "Users"
+
+### HTTP Methods
+
+#### Get user list
+
+`GET /users`
+
+#### Get user by id
+
+`GET /users/:id`
+
+#### Create new user
+
+`POST /users`
