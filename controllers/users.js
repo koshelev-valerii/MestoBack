@@ -11,14 +11,16 @@ module.exports.login = (req, res) => {
     .then((user) => {
       const token = jwt.sign({ _id: user._id }, NODE_ENV === 'production' ? JWT_SECRET : 'dev-secret', { expiresIn: '7d' });
 
-      res
-        .cookie('jwt', token, {
+      return res
+        .set({
+          authorization: `Bearer ${token}`,
+        })
+        .cookie('jwt', {
           maxAge: 3600000 * 24 * 7,
           httpOnly: true,
           sameSite: true,
         })
-        .end();
-      res.send({ token });
+        .send({ token });
     })
     .catch((err) => {
       res
@@ -34,7 +36,6 @@ module.exports.getUsers = (req, res) => {
 };
 
 module.exports.getUserById = (req, res) => {
-  console.log(req.body);
   User.findById(req.params.id)
     .then((users) => {
       if (!users) {
