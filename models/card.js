@@ -12,6 +12,12 @@ const cardSchema = new mongoose.Schema({
   link: {
     type: String,
     required: true,
+    validate: {
+      validator(value) {
+        return validator.isURL(value);
+      },
+      message: (props) => `${props.value} is not a valid link`,
+    },
   },
   owner: {
     type: mongoose.Schema.Types.ObjectId,
@@ -28,7 +34,5 @@ const cardSchema = new mongoose.Schema({
     default: Date.now,
   },
 });
-
-cardSchema.path('link').validate(validator.isURL, 'link invalid');
 
 module.exports = mongoose.model('card', cardSchema);
