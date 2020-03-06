@@ -18,13 +18,19 @@ router.post('/cards', (req, res) => {
 });
 
 router.delete('/cards/:id', (req, res) => {
-  Cards.findByIdAndRemove(req.params.id)
+  const user = req.user._id;
+
+  Cards.findById(req.params.id)
     .then((cards) => {
       if (!cards) {
         res.status(404).send({ message: 'Карточка не найдена' });
-        return;
+      } else if (cards.owner == user) {
+        Cards.findByIdAndRemove(req.params.id)
+          .then((card) => {
+            res.send({ data: card });
+          })
+          .catch((err) => res.status(500).send({ message: `Произошла ошибка : ${err}` }));
       }
-      res.send({ data: cards });
     })
     .catch((err) => res.status(500).send({ message: `Произошла ошибка : ${err}` }));
 });

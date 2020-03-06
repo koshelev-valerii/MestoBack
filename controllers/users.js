@@ -1,14 +1,41 @@
-const router = require('express').Router();
+const jwt = require('jsonwebtoken');
 
 const User = require('../models/user');
 
-router.get('/users', (req, res) => {
+const { NODE_ENV, JWT_SECRET } = process.env;
+
+module.exports.login = (req, res) => {
+  const { email, password } = req.body;
+
+  return User.findUserByCredentials(email, password)
+    .then((user) => {
+      const token = jwt.sign({ _id: user._id }, NODE_ENV === 'production' ? JWT_SECRET : 'dev-secret', { expiresIn: '7d' });
+
+      return res
+        .set({
+          authorization: `Bearer ${token}`,
+        })
+        .cookie('jwt', {
+          maxAge: 3600000 * 24 * 7,
+          httpOnly: true,
+          sameSite: true,
+        })
+        .send({ token });
+    })
+    .catch((err) => {
+      res
+        .status(401)
+        .send({ message: err.message });
+    });
+};
+
+module.exports.getUsers = (req, res) => {
   User.find({})
     .then((users) => res.send({ data: users }))
     .catch((err) => res.status(500).send({ message: `Произошла ошибка : ${err}` }));
-});
+};
 
-router.get('/users/:id', (req, res) => {
+module.exports.getUserById = (req, res) => {
   User.findById(req.params.id)
     .then((users) => {
       if (!users) {
@@ -18,14 +45,12 @@ router.get('/users/:id', (req, res) => {
       res.send({ data: users });
     })
     .catch((err) => res.status(500).send({ message: `Произошла ошибка : ${err}` }));
-});
+};
 
-router.post('/users', (req, res) => {
-  const { name, about, avatar } = req.body;
+module.exports.createUser = (req, res) => {
+  const { name, about, avatar, email, password } = req.body;
 
-  User.create({ name, about, avatar })
+  User.create({ name, about, avatar, email, password })
     .then((users) => res.send({ data: users }))
     .catch((err) => res.status(500).send({ message: `Произошла ошибка : ${err}` }));
-});
-
-module.exports = router;
+};
