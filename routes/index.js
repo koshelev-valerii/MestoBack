@@ -1,4 +1,4 @@
-const { Joi, errors } = require('celebrate');
+const { Joi } = require('celebrate');
 const joiObjectId = require('joi-objectid');
 const router = require('express').Router();
 
@@ -9,14 +9,8 @@ const cards = require('./cards');
 
 Joi.objectId = joiObjectId(Joi);
 
-router.use('/cards', cards);
-router.use('/users', users);
-router.use('/', (_, res, next) => {
-  next(new NotFoundError('The requested resource is not found'));
-});
-
-router.use(router.get('logger.error'));
-
-router.use(errors());
+router.use(users);
+router.use(cards);
+router.all('*', () => new NotFoundError('The requested resource is not found'));
 
 module.exports = router;
