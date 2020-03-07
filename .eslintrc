@@ -4,6 +4,7 @@
     "no-console": "off",
     "func-names": "off",
     "eqeqeq": "off",
+    "no-param-reassign": "off",
     "object-curly-newline": "off",
     "consistent-return": "off",
     "linebreak-style": 0,
