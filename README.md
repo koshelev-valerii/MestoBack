@@ -1,6 +1,6 @@
 # MestoBack author Valerii Koshelev
 
-## Version 0.3.6
+## Version 0.3.7
 
 ## Description
 
@@ -26,11 +26,6 @@
 `npm run start` (for start)
 `npm run dev` (for start with hot reload)
 
-## API Resource "Cards"
-
-
-
-
 ## Authentication
 
 ### Signup user
@@ -41,30 +36,30 @@
 
 `POST /signin`
 
-#### Get card list
+## API Resource "Cards"
+
+### Get card list
 
 `GET /cards`
 
-#### Create new card
+### Create new card
 
 `POST /cards`
 
-#### Delete card by id
+### Delete card by id
 
 `DELETE /cards/:id`
 
 ## API Resource "Users"
 
-
-
-#### Get user list
+### Get user list
 
 `GET /users`
 
-#### Get user by id
+### Get user by id
 
 `GET /users/:id`
 
-#### Create new user
+### Create new user
 
 `POST /users`
