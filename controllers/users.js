@@ -29,9 +29,24 @@ module.exports.login = (req, res, next) => {
     .catch(next);
 };
 
+
+module.exports.createUser = (req, res, next) => {
+  const { email, password, name, about, avatar } = req.body;
+
+  return User.create({ email, password, name, about, avatar })
+    .then((users) => {
+      users.password = '********';
+      res.send({ data: users });
+    })
+    .catch(next);
+};
+
 module.exports.getUsers = (req, res, next) => {
   User.find({})
-    .then((users) => res.send({ data: users }))
+    .then((users) => {
+      users.password = '********';
+      res.send({ data: users });
+    })
     .catch(next);
 };
 
@@ -41,15 +56,8 @@ module.exports.getUserById = (req, res, next) => {
       if (!users) {
         throw new NotFoundError('Пользователь не найден');
       }
+      users.password = '********';
       res.send({ data: users });
     })
-    .catch(next);
-};
-
-module.exports.createUser = (req, res, next) => {
-  const { name, about, avatar, email, password } = req.body;
-
-  User.create({ name, about, avatar, email, password })
-    .then((users) => res.send({ data: users }))
     .catch(next);
 };

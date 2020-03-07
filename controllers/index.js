@@ -1,11 +1,9 @@
+const router = require('express').Router();
+
 const cards = require('./cards');
 const users = require('./users');
 
-module.exports = (app) => {
-  app.set('controllers', {
-    cards: cards(app),
-    users: users(app),
-  });
+router.use(cards);
+router.use(users);
 
-  return app;
-};
+module.exports = router;
