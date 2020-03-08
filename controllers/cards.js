@@ -1,5 +1,10 @@
 const router = require('express').Router();
-const { NotFoundError } = require('../errors');
+const {
+  celebrate,
+  Joi,
+  Segments,
+} = require('celebrate');
+const { NotFoundError, ForbiddenError } = require('../errors');
 const Cards = require('../models/card');
 
 router.get('/cards', (req, res, next) => {
@@ -17,20 +22,30 @@ router.post('/cards', (req, res, next) => {
     .catch(next);
 });
 
-router.delete('/cards/:id', (req, res, next) => {
+router.delete('/cards/:id', celebrate({
+  [Segments.BODY]: Joi.object().keys({
+    name: Joi.string().required().min(2).max(30),
+    link: Joi.string().required().uri(),
+  }),
+}), (req, res, next) => {
   const user = req.user._id;
 
   Cards.findById(req.params.id)
     .then((cards) => {
       if (!cards) {
         throw new NotFoundError('Карточка не найдена');
-      } else if (cards.owner == user) {
-        Cards.findByIdAndRemove(req.params.id)
-          .then((card) => {
-            res.send({ data: card });
-          })
-          .catch(next);
+      } return cards;
+    })
+    .then((cards) => {
+      if (cards.owner !== user) {
+        throw new ForbiddenError('Вы пытаетесь удалить не свою карточку!');
       }
+
+      Cards.findByIdAndRemove(req.params.id)
+        .then((card) => {
+          res.send({ data: card });
+        })
+        .catch(next);
     })
     .catch(next);
 });
