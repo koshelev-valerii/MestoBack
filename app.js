@@ -9,6 +9,7 @@ const {
   celebrate,
   Joi,
   Segments,
+  errors,
 } = require('celebrate');
 const middlewares = require('./middlewares');
 const router = require('./routes');
@@ -48,7 +49,7 @@ app.post('/signup', celebrate({
     email: Joi.string().required().email(),
     password: Joi.string().required().min(8),
     name: Joi.string().required().min(2).max(30),
-    about: Joi.string().min(2).max(30),
+    about: Joi.string().required().min(2).max(30),
     avatar: Joi.string().required().uri(),
   }),
 }), createUser);
@@ -56,6 +57,7 @@ app.post('/signup', celebrate({
 app.use(middlewares);
 app.use(errorLogger);
 app.use(router);
+app.use(errors);
 
 // eslint-disable-next-line no-unused-vars
 app.use((err, req, res, next) => {
