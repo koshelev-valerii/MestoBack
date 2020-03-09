@@ -57,7 +57,7 @@ app.post('/signup', celebrate({
 app.use(middlewares);
 app.use(errorLogger);
 app.use(router);
-app.use(errors);
+app.use(errors());
 
 // eslint-disable-next-line no-unused-vars
 app.use((err, req, res, next) => {
