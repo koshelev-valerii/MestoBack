@@ -1,6 +1,6 @@
 {
   "name": "mesto-back",
-  "version": "0.3.8",
+  "version": "0.3.9",
   "description": "Backend part of the project Mesto",
   "main": "app.js",
   "dependencies": {
