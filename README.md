@@ -1,43 +1,65 @@
 # MestoBack author Valerii Koshelev
 
-## Version 0.3.5
+### Version 0.3.9
+
+## Description
+
+### The package is a Yandex Praktikum project which contains the implementation of backend part of the Mesto project - https://github.com/koshelev-valerii/Mesto
+
+## Where you can find me?
+
+`84.201.136.82` (ip)
+
+`https://mestoback.site/` (domain for front part)
+`https://www.mestoback.site/` (domain for front part)
+
+`https://api.mestoback.site/` (domain for back part)
+`https://www.api.mestoback.site/` (domain for back part)
 
 ## Getting Started 
 
 ### Download and run:  
   
-* `npm install` 
-* `npm run start` (for start)
-* `npm run dev` (for start with hot reload)
+`git clone https://github.com/koshelev-valerii/MestoBack`
+
+`npm install` 
+`npm run start` (for start)
+`npm run dev` (for start with hot reload)
+
+## Authentication
+
+### Signup user
+
+`POST /signup`
+
+### Signin user
+
+`POST /signin`
 
 ## API Resource "Cards"
 
-### HTTP Methods
-
-#### Get card list
+### Get card list
 
 `GET /cards`
 
-#### Create new card
+### Create new card
 
 `POST /cards`
 
-#### Delete card by id
+### Delete card by id
 
 `DELETE /cards/:id`
 
 ## API Resource "Users"
 
-### HTTP Methods
-
-#### Get user list
+### Get user list
 
 `GET /users`
 
-#### Get user by id
+### Get user by id
 
 `GET /users/:id`
 
-#### Create new user
+### Create new user
 
 `POST /users`
